@@ -1,0 +1,62 @@
+{
+    "ip address": {
+        "pattern": "(how (do|can) i find my server ip address|ip)",
+        "response": "You can find your server IP address by logging into your panel, clicking on your server, and checking the server IP address section."
+    },
+    "pull files": {
+        "pattern": "(how (do|can) i pull files|pull a file)",
+        "response": "To pull a file, go to the Files tab -> Pull File -> Paste the URL and location where you want the file to be pulled."
+    },
+    "changing server": {
+        "pattern": "(how (do|can) i change my server type|server jar|server type)",
+        "response": "To change your server type, you can install Optifine by..."
+    },
+    "changing java version": {
+        "pattern": "(how (do|can) i change my server java type|server java version|my java version)",
+        "response": "You can change your server Java version by going to the Startup tab -> View the Docker Image Section -> Click the drop down."
+    },
+    "changing build version": {
+        "pattern": "(how (do|can) i change my server build version|server build|my build type)",
+        "response": "You can change your server build type by clicking the Startup tab -> View the Build Number Section -> Enter your build number."
+    },
+    "startup arguments": {
+        "pattern": "(how (do|can) i change my server startup arguments|startup flags|server flags)",
+        "response": "You can change your server startup arguments by clicking the Startup tab -> View the startup arguments Section -> Enter your startup arguments."
+    },
+    "mysql database": {
+        "pattern": "(how (do|can) i create a mysql database|database)",
+        "response": "To create a MySQL database, go to the Database tab -> Create Database."
+    },
+    "schedules": {
+        "pattern": "(how (do|can) i create a schedule|automated restart)",
+        "response": "To create a schedule, go to the Schedule tab -> Create Schedule -> Follow the schedule creation guide."
+    },
+    "sub user": {
+        "pattern": "(how (do|can) i create a sub user|user)",
+        "response": "To create a sub-user, go to the User tab -> New User -> Fill out the user's email information."
+    },
+    "backups": {
+        "pattern": "(how (do|can) i create a backup|backup)",
+        "response": "To create a backup, go to the Backups tab -> New Backup."
+    },
+    "allocations": {
+        "pattern": "(how (do|can) i create an allocation|additional port|extra port)",
+        "response": "To create an allocation for additional ports, go to the Allocations tab -> New Allocation."
+    },
+    "ftp": {
+        "pattern": "(how (do|can) i use SFTP|use FTP|use Filezilla)",
+        "response": "You can find your server SFTP credentials by clicking the Settings tab -> View the SFTP Details section -> Copy your SFTP credentials."
+    },
+    "reinstall": {
+        "pattern": "(how (do|can) i reinstall my server|reinstall my files|reinstall)",
+        "response": "You can reinstall your server files by clicking the Settings tab -> View the Reinstall Server section -> Click Reinstall Server."
+    },
+    "server pfp": {
+        "pattern": "(how (do|can) i make a server pfp|server icon)",
+        "response": "Check out a brief knowledge article on how to do so [here](https://github.com/)."
+    },
+    "unzip": {
+        "pattern": "(how (do|can) i unzip a folder|a file)",
+        "response": "You can unzip a folder by right-clicking the folder and selecting 'Extract' or 'Unarchive'."
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "general question": {
+        "pattern": "(i have a question|i need help|can you help me|i have a query|i have a doubt)",
+        "response": "Maybe I can help! What do you need assistance with?"
+    },
+    "bot name": {
+        "pattern": "(what is your name|who are you)",
+        "response": "I am your helpful Discord bot, here to answer your questions!"
+    },
+    "bot creator": {
+        "pattern": "(who created you|who is your creator)",
+        "response": "I was created by a passionate developer to assist with various tasks and answer questions."
+    },
+    "how are you": {
+        "pattern": "(how are you bot|how's it going bot)",
+        "response": "I'm just a bot, but thanks for asking! How can I assist you today?"
+    },
+    "help me": {
+        "pattern": "(help me|assist me)",
+        "response": "Maybe I can help! Please let me know what you need assistance with."
+    },
+    "who is the best bot": {
+        "pattern": "(who is the best bot|who's the best)",
+        "response": "Well, I'm biased, but I like to think I'm pretty good at what I do!"
+    },
+    "how do I use this bot": {
+        "pattern": "(how do I use this bot|how to interact with you)",
+        "response": "You can ask me questions, use commands, or request specific information."
+    },
+    "how can I contact support": {
+        "pattern": "(how can I contact support|how to get support)",
+        "response": "You can contact support through our website or Discord support channel https://discord.com/channels/1252686015408115772/1252686015408115775"
+    },
+    "how do I report a user": {
+        "pattern": "(how do I report a user|report discord user)",
+        "response": "You can report a user by right-clicking their name, selecting 'Report', and following the prompts. If they are violation Virtue Host Terms of Service, please contact us: https://discord.com/channels/1252686015408115772/1252686015408115775"
+    }
+}
