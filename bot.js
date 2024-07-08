@@ -1,8 +1,7 @@
 const { Client, GatewayIntentBits, TextChannel } = require('discord.js');
+const { logInteraction } = require('./logger'); // Import the logInteraction function from logger.js
 const fs = require('fs');
 const path = require('path');
-const { logInteraction } = require('./logger'); // Import the logInteraction function from logger.js
-const net = require('net'); // Import the net module for TCP socket operations
 require('dotenv').config();
 
 const client = new Client({
@@ -35,6 +34,9 @@ function loadQuestions(dir) {
 // Load questions from Minecraft folder
 const minecraftQuestions = loadQuestions(path.join(__dirname, 'src/questions/minecraft'));
 
+// Array of supported channel IDs
+const supportedChannels = ['1219670538692071454','1199934460389490688','1229171729331523704']; // Replace with actual channel IDs
+
 // Function to find the best match for a user's message
 function getResponse(message) {
     try {
@@ -51,9 +53,6 @@ function getResponse(message) {
         return null;
     }
 }
-
-// Array of supported channel IDs
-const supportedChannels = ['1219670538692071454', '1199934460389490688', '1252686015408115775']; // Replace with actual channel IDs
 
 // Function to check if a channel is designated for support
 function isSupportChannel(channel) {
@@ -72,51 +71,28 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// Command to ping a TCP port
 client.on('messageCreate', message => {
     try {
         if (message.author.bot) return; // Ignore messages from bots
 
-        logInteraction(message); // Log the interaction
+        logInteraction(message, supportedChannels); // Log the interaction
 
-        const args = message.content.slice(PREFIX.length).trim().split(/ +/);
-        const command = args.shift().toLowerCase();
+        const response = getResponse(message);
 
-        if (command === 'pingtcp') {
-            const ip = args[0]; // IP address to ping
-            const port = parseInt(args[1], 10); // Port to ping
-
-            if (!ip || !port) {
-                message.reply("Please provide a valid IP address and port number.");
+        if (response) {
+            // Check if the message is sent in a text channel and if support is enabled for the channel
+            if (!(message.channel instanceof TextChannel) || !isSupportEnabled(message.channel)) {
+                message.reply("This channel isn't a support channel or support is disabled in this channel. Please visit the support channels for assistance.");
                 return;
             }
 
-            const socket = net.createConnection(port, ip, () => {
-                message.reply(`Successfully connected to ${ip}:${port}.`);
-                socket.end();
-            });
-
-            socket.on('error', (err) => {
-                message.reply(`Failed to connect to ${ip}:${port}. Error: ${err.message}`);
-            });
-        } else {
-            const response = getResponse(message);
-
-            if (response) {
-                // Check if the message is sent in a text channel and if support is enabled for the channel
-                if (!(message.channel instanceof TextChannel) || !isSupportEnabled(message.channel)) {
-                    message.reply("This channel isn't a support channel or support is disabled in this channel. Please visit the support channels for assistance.");
-                    return;
-                }
-
-                // Check if the channel is designated for support
-                if (!isSupportChannel(message.channel)) {
-                    message.reply("This channel isn't designated for support. Please visit the support channels for assistance.");
-                    return;
-                }
-
-                message.reply(response); // Reply with the predefined response
+            // Check if the channel is designated for support
+            if (!isSupportChannel(message.channel)) {
+                message.reply("This channel isn't designated for support. Please visit the support channels for assistance.");
+                return;
             }
+
+            message.reply(response); // Reply with the predefined response
         }
     } catch (error) {
         console.error(`Error handling message: ${error.message}`);
