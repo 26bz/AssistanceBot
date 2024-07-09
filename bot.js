@@ -10,6 +10,9 @@ const client = new Client({
 
 const PREFIX = "!"; // Command prefix
 
+// Initialize userSessions object to store session data
+const userSessions = {};
+
 // Function to load questions from JSON files
 function loadQuestions(dir) {
     try {
@@ -38,7 +41,7 @@ const minecraftQuestions = loadQuestions(path.join(__dirname, 'src/questions/min
 const supportedChannels = ['1219670538692071454','1199934460389490688','1229171729331523704']; // Replace with actual channel IDs
 
 // Function to find the best match for a user's message
-function getResponse(message) {
+function getResponse(message, session) {
     try {
         const content = message.content.toLowerCase(); // Convert the message content to lowercase
 
@@ -77,7 +80,20 @@ client.on('messageCreate', message => {
 
         logInteraction(message, supportedChannels); // Log the interaction
 
-        const response = getResponse(message);
+        const userId = message.author.id;
+        let session = userSessions[userId];
+
+        // Initialize session if it doesn't exist
+        if (!session) {
+            session = {
+                context: {}, // Store context-specific data here
+                lastQuery: '', // Track the last query or interaction
+                // Add more session-specific data as needed
+            };
+            userSessions[userId] = session;
+        }
+
+        const response = getResponse(message, session);
 
         if (response) {
             // Check if the message is sent in a text channel and if support is enabled for the channel
@@ -93,7 +109,14 @@ client.on('messageCreate', message => {
             }
 
             message.reply(response); // Reply with the predefined response
+        } else {
+            // Handle cases where no response is generated
+            message.reply("I'm sorry, I didn't quite understand that. Can you please rephrase?");
         }
+
+        // Update session data based on current message
+        session.lastQuery = message.content;
+
     } catch (error) {
         console.error(`Error handling message: ${error.message}`);
     }
