@@ -13,6 +13,9 @@
     "compromise": "^14.13.0",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
-    "net": "^1.0.2"
+    "install": "^0.13.0",
+    "npm": "^10.8.2",
+    "winston": "^3.13.1",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
