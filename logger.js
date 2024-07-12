@@ -1,70 +1,44 @@
-const fs = require('fs');
-const path = require('path');
 const winston = require('winston');
-require('winston-daily-rotate-file');
+const DailyRotateFile = require('winston-daily-rotate-file');
+const path = require('path');
+const fs = require('fs');
 
-// Ensure the log directory exists
+// Create logs directory if it doesn't exist
 const logDirectory = path.join(__dirname, 'logs');
 if (!fs.existsSync(logDirectory)) {
     fs.mkdirSync(logDirectory);
 }
 
-// Configure winston logger
+// Configure winston logger with daily rotation
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
     transports: [
-        new winston.transports.DailyRotateFile({
-            filename: path.join(logDirectory, 'interaction_logs-%DATE%.log'),
+        new DailyRotateFile({
+            filename: path.join(logDirectory, 'pattern_matches-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
-            zippedArchive: true,
-            maxSize: '20m',
-            maxFiles: '14d'
+            maxSize: '100m',
+            maxFiles: '14d' // Keep logs for 14 days
         })
     ]
 });
 
-// Separate logger for errors
-const errorLogger = winston.createLogger({
-    level: 'error',
-    format: winston.format.json(),
-    transports: [
-        new winston.transports.File({ filename: path.join(logDirectory, 'error_logs.json') })
-    ]
-});
-
-// Check if logging is enabled
-const loggingEnabled = process.env.LOGGING_ENABLED === 'true';
-
-function logError(error) {
-    if (!loggingEnabled) return;
-    
-    errorLogger.error({
-        timestamp: new Date().toISOString(),
-        message: error.message,
-        stack: error.stack
-    });
-}
-
-function logInteraction(message, supportedChannels) {
-    if (!loggingEnabled) return;
-
+// Function to log pattern matches
+function logPatternMatch(message, pattern) {
     const logData = {
+        user: message.author.tag,
         userId: message.author.id,
-        username: message.author.tag,
+        message: message.content,
+        pattern: pattern,
+        date: new Date().toISOString(),
         channelId: message.channel.id,
-        channelName: message.channel.name,
-        timestamp: new Date().toISOString(),
-        content: message.content,
-        messageType: message.type
+        channelName: message.channel.name
     };
 
-    if (supportedChannels.includes(logData.channelId)) {
-        logger.info(logData);
-    }
+    logger.info(logData);
 }
 
 module.exports = {
-    logInteraction,
-    logError
+    logger,
+    logPatternMatch
 };
