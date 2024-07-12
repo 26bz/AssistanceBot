@@ -1,8 +1,6 @@
-# Discord Bot - AssistanceBot
-
 ## Overview
 
-This Discord bot is designed to provide basic interaction and support functionalities in Discord servers.
+This Discord bot, named AssistanceBot, is designed to provide basic interaction and support functionalities in Discord servers.
 
 ### Features
 
