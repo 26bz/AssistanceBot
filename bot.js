@@ -1,4 +1,5 @@
 const { Client, GatewayIntentBits, TextChannel } = require('discord.js');
+const { logger, logPatternMatch } = require('./logger');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -37,7 +38,7 @@ function loadQuestions(dir) {
 const questions = loadQuestions(path.join(__dirname, 'src/questions/minecraft'));
 
 // Array of blacklisted channel IDs
-const blacklistedChannels = ['1199934495634231357']; // Replace with actual channel IDs
+const blacklistedChannels = ['1219670538692071454', '1199934460389490688', '1229171729331523704']; // Replace with actual channel IDs
 
 // Function to find the best match for a user's message
 function getResponse(message) {
@@ -47,7 +48,7 @@ function getResponse(message) {
         for (const { pattern, response } of questions) {
             // Check if the content matches the pattern
             if (pattern.test(content)) {
-                return response;
+                return { response, pattern: pattern.toString() };
             }
         }
         
@@ -81,21 +82,17 @@ client.on('messageCreate', message => {
     try {
         if (message.author.bot) return; // Ignore messages from bots
 
-        const response = getResponse(message);
+        const result = getResponse(message);
 
-        // Only respond with predefined responses if a match is found
-        if (response) {
+        if (result) {
             // Check if the message is sent in a text channel and if support is enabled for the channel
             if (!(message.channel instanceof TextChannel) || !isSupportEnabled(message.channel)) {
                 message.reply("This channel isn't a supported channel or support is disabled in this channel. Please visit the supported channels for assistance.");
                 return;
             }
 
-            message.reply(response); // Reply with the predefined response
-        } else {
-            // Handle regular conversation here (no predefined response found)
-            // You can choose not to reply here or handle it differently based on your needs
-            console.log(`Regular conversation message: ${message.content}`);
+            message.reply(result.response); // Reply with the predefined response
+            logPatternMatch(message, result.pattern); // Log the pattern match
         }
 
     } catch (error) {
