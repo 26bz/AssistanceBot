@@ -1,6 +1,6 @@
 {
     "general question": {
-        "pattern": "(i have a question|i need help|can you help me|i have a query|i have a doubt)",
+        "pattern": "(i have a question|i need help|can you help me|i have a query)",
         "response": "Maybe I can help! What do you need assistance with?"
     },
     "bot name": {
@@ -20,7 +20,7 @@
         "response": "Maybe I can help! Please let me know what you need assistance with."
     },
     "who is the best bot": {
-        "pattern": "(who is the best bot|who's the best)",
+        "pattern": "(who is the best bot)",
         "response": "Well, I'm biased, but I like to think I'm pretty good at what I do!"
     },
     "how do I use this bot": {
@@ -28,11 +28,15 @@
         "response": "You can ask me questions, use commands, or request specific information."
     },
     "how can I contact support": {
-        "pattern": "(how can I contact support|how to get support)",
-        "response": "You can contact support through our website or Discord support channel https://discord.com/channels/1252686015408115772/1252686015408115775"
+        "pattern": "(how can I contact support|how to get support|who is staff)",
+        "response": "You can contact support through our website or Discord support channel https://discord.com/channels/1199932651931435009/1203291771749269534"
     },
     "how do I report a user": {
-        "pattern": "(how do I report a user|report discord user)",
-        "response": "You can report a user by right-clicking their name, selecting 'Report', and following the prompts. If they are violation Virtue Host Terms of Service, please contact us: https://discord.com/channels/1252686015408115772/1252686015408115775"
+        "pattern": "(how do I report a user|how to report discord user)",
+        "response": "You can report a user by right-clicking their name, selecting 'Report', and following the prompts. If they are violation Virtue Host Terms of Service, please contact us: https://discord.com/channels/1199932651931435009/1203291771749269534"
+    },
+    "trials": {
+        "pattern": "(how long are trials|how long are trial servers)",
+        "response": "48 Hours!"
     }
 }
