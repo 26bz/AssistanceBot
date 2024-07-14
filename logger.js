@@ -1,44 +1,32 @@
-const winston = require('winston');
-const DailyRotateFile = require('winston-daily-rotate-file');
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 
-// Create logs directory if it doesn't exist
-const logDirectory = path.join(__dirname, 'logs');
-if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory);
+const logFilePath = path.join(__dirname, 'interaction_logs.json');
+
+function logInteraction(message, blacklistedChannels) {
+    try {
+        const logData = {
+            userId: message.author.id,
+            channelId: message.channel.id,
+            timestamp: new Date().toISOString(),
+            content: message.content
+            // Add more metadata as needed
+        };
+
+        // Check if the channel is not blacklisted for logging
+        if (!blacklistedChannels.includes(logData.channelId)) {
+            fs.appendFileSync(logFilePath, JSON.stringify(logData) + '\n');
+        }
+    } catch (error) {
+        console.error(`Error logging interaction: ${error.message}`);
+    }
 }
 
-// Configure winston logger with daily rotation
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.json(),
-    transports: [
-        new DailyRotateFile({
-            filename: path.join(logDirectory, 'pattern_matches-%DATE%.log'),
-            datePattern: 'YYYY-MM-DD',
-            maxSize: '100m',
-            maxFiles: '14d' // Keep logs for 14 days
-        })
-    ]
-});
-
-// Function to log pattern matches
 function logPatternMatch(message, pattern) {
-    const logData = {
-        user: message.author.tag,
-        userId: message.author.id,
-        message: message.content,
-        pattern: pattern,
-        date: new Date().toISOString(),
-        channelId: message.channel.id,
-        channelName: message.channel.name
-    };
-
-    logger.info(logData);
+    console.log(`Pattern match: User ${message.author.id} matched pattern ${pattern} with message: ${message.content}`);
 }
 
 module.exports = {
-    logger,
+    logInteraction,
     logPatternMatch
 };
