@@ -1,75 +1,75 @@
 {
     "ip address": {
         "pattern": "(how (do|can) i find my server ip address|where is the ip)",
-        "response": "You can find your server IP address by logging into your panel, clicking on your server, and checking the server IP address section."
+        "response": "To locate your server IP address, log into your panel, select your server, and check the right section for the server IP address."
     },
     "pull files": {
         "pattern": "(how (do|can) i pull files|can i pull a file)",
-        "response": "To pull a file, go to the Files tab -> Pull File -> Paste the URL and location where you want the file to be pulled."
+        "response": "To pull a file, navigate to the Files tab, click on Pull File, then paste the URL and specify the location where you want the file to be pulled. Done!"
     },
     "changing server": {
         "pattern": "(how (do|can) i change my server type|how (do|can) i change my server jar)",
-        "response": "To change your server type, Access your active product in the Client Area -> Select the Upgrade/Download Tab -> Select The Type"
+        "response": "To change your server type, go to the [Client Area](https://billing.virtue-host.com/login) and access your active product. Then, select the Upgrade/Download tab and choose the desired server type."
     },
     "changing java version": {
         "pattern": "(how (do|can) i change my server java type|how (do|can) i change my server server java version|how (do|can) i change my java version)",
-        "response": "You can change your server Java version by going to the Startup tab -> View the Docker Image Section -> Click the drop down."
+        "response": "To change your server's Java version, navigate to the Startup tab, find the Docker Image section, click the drop-down menu, and select the desired Java version."
     },
     "changing build version": {
         "pattern": "(how (do|can) i change my server build version|i want to change my server build|how (do|can) i change my server build type)",
-        "response": "You can change your server build type by clicking the Startup tab -> View the Build Number Section -> Enter your build number."
+        "response": "To change your server build type, click on the Startup tab, view the Build Number section, and enter your build number."
     },
     "startup arguments": {
         "pattern": "(how (do|can) i change my server startup arguments|how (do|can) i change my server startup flags|how (do|can) i change my server server flags)",
-        "response": "You can change your server startup arguments by clicking the Startup tab -> View the startup arguments Section -> Enter your startup arguments."
+        "response": "To change your server startup arguments, go to the Startup tab, locate the Startup Arguments section, and enter your desired startup arguments."
     },
     "mysql database": {
         "pattern": "(how (do|can) i create a mysql database|how (do|can) i create a database)",
-        "response": "To create a MySQL database, go to the Database tab -> Create Database."
+        "response": "To create a MySQL database, navigate to the Database tab, click on New Database, and fill out the create database form."
     },
     "schedules": {
         "pattern": "(how (do|can) i create a schedule|how (do|can) i create a automated restart)",
-        "response": "To create a schedule, go to the Schedule tab -> Create Schedule -> Follow the schedule creation guide."
+        "response": "To create a schedule, go to the Schedule tab, click on Create Schedule, and follow the schedule creation guide."
     },
     "sub user": {
         "pattern": "(how (do|can) i create a sub user|how (do|can) i create a user|how to (make|create) a sub user)",
-        "response": "To create a sub-user, go to the User tab -> New User -> Fill out the user's email information."
+        "response": "To create a sub-user, go to the Users tab, click on New User, and fill out the user's email. Below the email, you can select permissions for the user across various categories of server management. Afterward, click Invite User. The user will receive an email with a link that grants them access to create a password for the panel once clicked."
     },
     "backups": {
         "pattern": "(how (do|can) i create a backup|how (do|can) i backup)",
-        "response": "To create a backup, go to the Backups tab -> New Backup."
+        "response": "To create a backup, go to the Backups tab, click on New Backup. You can then name your backup, choose directories to ignore, lock the backup from being deleted if desired, and finally, click Start Backup."
     },
     "allocations": {
         "pattern": "(how (do|can) i create an allocation|how (do|can) i create an additional port|how (do|can) i create an extra port)",
-        "response": "To create an allocation for additional ports, go to the Allocations tab -> New Allocation."
+        "response": "To create an allocation for additional ports, navigate to the Allocations tab and click on New Allocation."
     },
     "ftp": {
         "pattern": "(how (do|can) i use SFTP|how (do|can) i use FTP|how (do|can) i use Filezilla)",
-        "response": "You can find your server SFTP credentials by clicking the Settings tab -> View the SFTP Details section -> Copy your SFTP credentials."
+        "response": "You can find your server's SFTP credentials by clicking on the Settings tab, navigating to the SFTP Details section, and copying your SFTP credentials from there."
     },
     "reinstall": {
         "pattern": "(how (do|can) i reinstall my server|how (do|can) i reinstall my files|how (do|can) i reinstall)",
-        "response": "You can reinstall your server files by clicking the Settings tab -> View the Reinstall Server section -> Click Reinstall Server."
+        "response": "You can reinstall your server files by clicking on the Settings tab, then navigating to the Reinstall Server section, and finally clicking on Reinstall Server. It's important to note that reinstalling without deleting files in the Files tab will only update and repair game versions, build types, etc."
     },
     "server pfp": {
         "pattern": "(how (do|can) i make a server pfp|how (do|can) i make a server icon)",
-        "response": "Check out a brief knowledge article on how to do so [here](https://billing.virtue-host.com/knowledgebase/110/)."
+        "response": "You can check out a brief knowledge article on how to do so [here](https://billing.virtue-host.com/knowledgebase/110/)."
     },
     "unzip": {
         "pattern": "(how (do|can) i unzip a folder|how (do|can) i unzip a file)",
-        "response": "You can unzip a folder by right-clicking the folder and selecting 'Extract' or 'Unarchive'."
+        "response": "You can unzip a folder by right-clicking on the folder and selecting 'Extract' or 'Unarchive'."
     },
     "upgrade package": {
         "pattern": "(how (do|can) i upgrade my server package|how (do|can) i upgrade|how (do|can) i upgrade my server)",
-        "response": "To upgrade your server package, log in to your client area, go to your services, select the server you want to upgrade, and follow the upgrade instructions."
+        "response": "To upgrade your server package, log in to your client area, navigate to your services, select the server you wish to upgrade, click on the upgrade/downgrade tab, and choose the package you want to upgrade to."
     },
     "downgrade package": {
         "pattern": "(how (do|can) i downgrade my server package|how (do|can) i downgrade my downgrade package|how (do|can) i downgrade my downgrade server)",
-        "response": "To downgrade your server package, log in to your client area, go to your services, select the server you want to downgrade, and follow the downgrade instructions."
+        "response": "To downgrade your server package, log in to your client area, navigate to your services, select the server you wish to downgrade, click on the upgrade/downgrade tab, and choose the package you want to downgrade to."
     },
     "cancel service": {
         "pattern": "(how (do|can) i cancel my service|how (do|can) i cancel server|how (do|can) i cancel subscription)",
-        "response": "To cancel your service, log in to your client area, go to your services, select the service you want to cancel, and follow the cancellation instructions."
+        "response": "To cancel your service, log in to your client area, navigate to your services, select the service you want to cancel, and follow the cancellation instructions provided."
     },
     "billing issues": {
         "pattern": "(how (do|can) i resolve billing issues|i have billing problems|how (do|can) i contact billing support)",
@@ -77,7 +77,7 @@
     },
     "server logs": {
         "pattern": "(how (do|can) i check my server logs|how (do|can) i view server logs|how (do|can) i access server logs)",
-        "response": "You can check your server logs by going to the Logs Folder in your server panels Files tab."
+        "response": "You can check your server logs by navigating to the Logs folder in your server panel's Files tab."
     },
     "server status": {
         "pattern": "(how (do|can) i check my server status|how (do|can) i check server status)",
@@ -85,15 +85,15 @@
     },
     "plugin installation": {
         "pattern": "(how (do|can) i install plugins|how (do|can) i install plugin|how (do|can) i add plugin)",
-        "response": "To install plugins, go to the Plugins tab in your server panel, search for the desired plugin, and click 'Install'."
+        "response": "To install plugins, navigate to the Files tab in your server panel, select the plugins folder, and then either drag and drop the plugin files, use the pull files button, or click the upload button."
     },
     "mod installation": {
         "pattern": "(how (do|can) i install mods|how (do|can) i install mod|how (do|can) i add mod)",
-        "response": "To install mods, go to the Mods tab in your server panel, search for the desired mod, and click 'Install'."
+        "response": "To install mods, go to the More tab in your server panel, click on the Modpacks button, choose your preferred mod provider, and then select the version of the mod you want to download."
     },
     "control panel": {
         "pattern": "(how (do|can) i access the control panel|how (do|can) i access control panel|how (do|can) i access panel access)",
-        "response": "You can access the control panel by logging into[Game Panel](https://gp.virtue-host.com/)"
+        "response": "You can access the control panel by logging into [Game Panel](https://gp.virtue-host.com/)."
     },
     "crashing": {
         "pattern": "((my|the) server is crashing|(my|the) server keeps crashing|(my|the) server crashed)",
@@ -101,10 +101,10 @@
     },
     "reset end": {
         "pattern": "(how (do|can) i reset the end|how (do|can) i reset the end world)",
-        "response": "You can reset the End world for Modded servers by visiting the Files tab -> World folder -> Delete the DIM1. If your server is a   Java server, you can delete the World_the_end folder in the Files tab"
+        "response": "You can reset the End world for Modded servers by visiting the Files tab, navigating to the World folder, and deleting the DIM1 folder. For Java servers, you can delete the World_the_end folder in the Files tab."
     },
     "datapacks": {
         "pattern": "(how (do|can) i install datapacks|how (do|can) i install datapack)",
-        "response": "You can install datapacks by visiting the Files tab -> Wolrd folder -> Datapacks Folder -> Simpily upload the .Zip of your datapack"
+        "response": "You can install datapacks by visiting the Files tab, navigating to the World folder, then the Datapacks folder, and simply uploading the .zip file of your datapack."
     }
 }
