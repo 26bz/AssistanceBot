@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, TextChannel } = require('discord.js');
-const { logger, logPatternMatch } = require('./logger');
+const { logInteraction, logPatternMatch } = require('./logger'); // Updated import
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -93,6 +93,7 @@ client.on('messageCreate', message => {
 
             message.reply(result.response); // Reply with the predefined response
             logPatternMatch(message, result.pattern); // Log the pattern match
+            logInteraction(message, blacklistedChannels); // Log the interaction
         }
 
     } catch (error) {
