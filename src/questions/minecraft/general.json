@@ -29,11 +29,11 @@
     },
     "how can I contact support": {
         "pattern": "(how can I contact support|how to get support|who is staff)",
-        "response": "You can contact support through our website or Discord support channel https://discord.com/channels/1199932651931435009/1203291771749269534"
+        "response": "You can contact support through our website or Discord support channel at [https://discord.com/channels/1199932651931435009/1203291771749269534](https://discord.com/channels/1199932651931435009/1203291771749269534)."
     },
     "how do I report a user": {
         "pattern": "(how do I report a user|how to report discord user)",
-        "response": "You can report a user by right-clicking their name, selecting 'Report', and following the prompts. If they are violation Virtue Host Terms of Service, please contact us: https://discord.com/channels/1199932651931435009/1203291771749269534"
+        "response": "You can report a user by right-clicking their name, selecting 'Report', and following the prompts. If they are violating Virtue Host's Terms of Service, please contact us through our Discord server at [https://discord.com/channels/1199932651931435009/1203291771749269534](https://discord.com/channels/1199932651931435009/1203291771749269534) or via our contact form at [https://billing.virtue-host.com/contact.php](https://billing.virtue-host.com/contact.php)."
     },
     "trials": {
         "pattern": "(how long are trials|how long are trial servers)",
