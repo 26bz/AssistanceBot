@@ -95,10 +95,15 @@ client.on('messageCreate', message => {
             }
 
             message.reply(result.response);
+
+            console.log('Logging pattern match'); // Debug statement
             logPatternMatch(message, result.pattern);
+
+            console.log('Logging interaction'); // Debug statement
             logInteraction(message, BLACKLISTED_CHANNELS);
         }
     } catch (error) {
+        console.log('Logging error'); // Debug statement
         logError(error);
     }
 });
