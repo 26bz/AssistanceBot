@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, TextChannel } = require('discord.js');
-const { logInteraction, logPatternMatch } = require('./logger');
+const { logInteraction, logPatternMatch, logError } = require('./logger');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -85,11 +85,12 @@ client.on('messageCreate', message => {
     try {
         if (message.author.bot) return;
 
-        const result = getResponse(message.content);
+        const content = message.content;
+        const result = getResponse(content);
 
         if (result) {
             if (!(message.channel instanceof TextChannel) || !isSupportEnabled(message.channel)) {
-                message.reply("This channel isn't a supported channel or support is disabled in this channel. Please visit the supported channels for assistance.");
+                message.reply("This channel isn't a supported channel or support is disabled in this channel.");
                 return;
             }
 
@@ -97,9 +98,8 @@ client.on('messageCreate', message => {
             logPatternMatch(message, result.pattern);
             logInteraction(message, BLACKLISTED_CHANNELS);
         }
-
     } catch (error) {
-        console.error(`Error handling message: ${error.message}`);
+        logError(error);
     }
 });
 
