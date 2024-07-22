@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, TextChannel } = require('discord.js');
-const { logInteraction, logPatternMatch } = require('./logger'); // Updated import
+const { logInteraction, logPatternMatch } = require('./logger');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
@@ -9,22 +9,25 @@ const client = new Client({
 });
 
 const PREFIX = "!"; // Command prefix
+const BLACKLISTED_CHANNELS = ['1219670538692071454', '1199934460389490688', '1229171729331523704']; // Replace with actual channel IDs
 
-// Initialize userSessions object to store session data
-const userSessions = {};
+const userSessions = {}; // Initialize userSessions object to store session data
 
-// Function to load questions from JSON files
+/**
+ * Load questions from JSON files in the specified directory.
+ * @param {string} dir - The directory to load questions from.
+ * @returns {Array} The loaded questions.
+ */
 function loadQuestions(dir) {
     try {
         const files = fs.readdirSync(dir);
-        let questions = [];
-
-        files.forEach(file => {
+        const questions = files.flatMap(file => {
             const filePath = path.join(dir, file);
             const fileQuestions = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-            for (const [key, value] of Object.entries(fileQuestions)) {
-                questions.push({ pattern: new RegExp(value.pattern, 'i'), response: value.response });
-            }
+            return Object.values(fileQuestions).map(({ pattern, response }) => ({
+                pattern: new RegExp(pattern, 'i'),
+                response
+            }));
         });
 
         return questions;
@@ -34,44 +37,44 @@ function loadQuestions(dir) {
     }
 }
 
-// Load questions from Minecraft folder
 const questions = loadQuestions(path.join(__dirname, 'src/questions/minecraft'));
 
-// Array of blacklisted channel IDs
-const blacklistedChannels = ['1219670538692071454', '1199934460389490688', '1229171729331523704']; // Replace with actual channel IDs
+/**
+ * Check if a channel is blacklisted.
+ * @param {TextChannel} channel - The channel to check.
+ * @returns {boolean} True if the channel is blacklisted, false otherwise.
+ */
+function isBlacklistedChannel(channel) {
+    return BLACKLISTED_CHANNELS.includes(channel.id);
+}
 
-// Function to find the best match for a user's message
-function getResponse(message) {
+/**
+ * Check if support is enabled for a channel.
+ * @param {TextChannel} channel - The channel to check.
+ * @returns {boolean} True if support is enabled, false otherwise.
+ */
+function isSupportEnabled(channel) {
+    return !isBlacklistedChannel(channel);
+}
+
+/**
+ * Find the best match for a user's message.
+ * @param {string} content - The content of the message.
+ * @returns {Object|null} The matched response and pattern, or null if no match is found.
+ */
+function getResponse(content) {
     try {
-        const content = message.content.toLowerCase(); // Convert the message content to lowercase
-
+        const lowerContent = content.toLowerCase();
         for (const { pattern, response } of questions) {
-            // Check if the content matches the pattern
-            if (pattern.test(content)) {
+            if (pattern.test(lowerContent)) {
                 return { response, pattern: pattern.toString() };
             }
         }
-        
-        // If no match is found, return null
         return null;
-
     } catch (error) {
         console.error(`Error getting response: ${error.message}`);
         return null;
     }
-}
-
-// Function to check if a channel is blacklisted
-function isBlacklistedChannel(channel) {
-    // Check if the channel ID is in the blacklistedChannels array
-    return blacklistedChannels.includes(channel.id);
-}
-
-// Function to check if support is enabled for a channel
-function isSupportEnabled(channel) {
-    // Implement your logic to check if support is enabled for the channel
-    // For demonstration purposes, return true if the channel is not blacklisted
-    return !isBlacklistedChannel(channel);
 }
 
 client.once('ready', () => {
@@ -80,20 +83,19 @@ client.once('ready', () => {
 
 client.on('messageCreate', message => {
     try {
-        if (message.author.bot) return; // Ignore messages from bots
+        if (message.author.bot) return;
 
-        const result = getResponse(message);
+        const result = getResponse(message.content);
 
         if (result) {
-            // Check if the message is sent in a text channel and if support is enabled for the channel
             if (!(message.channel instanceof TextChannel) || !isSupportEnabled(message.channel)) {
                 message.reply("This channel isn't a supported channel or support is disabled in this channel. Please visit the supported channels for assistance.");
                 return;
             }
 
-            message.reply(result.response); // Reply with the predefined response
-            logPatternMatch(message, result.pattern); // Log the pattern match
-            logInteraction(message, blacklistedChannels); // Log the interaction
+            message.reply(result.response);
+            logPatternMatch(message, result.pattern);
+            logInteraction(message, BLACKLISTED_CHANNELS);
         }
 
     } catch (error) {
