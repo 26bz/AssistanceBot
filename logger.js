@@ -3,13 +3,11 @@ const path = require('path');
 const winston = require('winston');
 require('winston-daily-rotate-file');
 
-// Ensure the log directory exists
 const logDirectory = path.join(__dirname, 'logs');
 if (!fs.existsSync(logDirectory)) {
     fs.mkdirSync(logDirectory);
 }
 
-// Configure winston logger
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
@@ -24,7 +22,6 @@ const logger = winston.createLogger({
     ]
 });
 
-// Separate logger for errors
 const errorLogger = winston.createLogger({
     level: 'error',
     format: winston.format.json(),
@@ -33,15 +30,8 @@ const errorLogger = winston.createLogger({
     ]
 });
 
-// Check if logging is enabled
-const loggingEnabled = process.env.LOGGING_ENABLED === 'true';
-
-/**
- * Log an error.
- * @param {Error} error - The error to log.
- */
 function logError(error) {
-    if (!loggingEnabled) return;
+    if (process.env.LOGGING_ENABLED !== 'true') return;
 
     errorLogger.error({
         timestamp: new Date().toISOString(),
@@ -50,13 +40,8 @@ function logError(error) {
     });
 }
 
-/**
- * Log an interaction.
- * @param {Message} message - The message to log.
- * @param {Array<string>} supportedChannels - Array of supported channel IDs.
- */
 function logInteraction(message, supportedChannels) {
-    if (!loggingEnabled) return;
+    if (process.env.LOGGING_ENABLED !== 'true') return;
 
     const logData = {
         userId: message.author.id,
@@ -73,15 +58,10 @@ function logInteraction(message, supportedChannels) {
     }
 }
 
-/**
- * Log a pattern match.
- * @param {Message} message - The message that matched the pattern.
- * @param {string} pattern - The pattern that was matched.
- */
 function logPatternMatch(message, pattern) {
-    if (!loggingEnabled) return;
+    if (process.env.LOGGING_ENABLED !== 'true') return;
 
-    logger.info({
+    const logData = {
         userId: message.author.id,
         username: message.author.tag,
         channelId: message.channel.id,
@@ -90,7 +70,9 @@ function logPatternMatch(message, pattern) {
         content: message.content,
         messageType: message.type,
         matchedPattern: pattern
-    });
+    };
+
+    logger.info(logData);
 }
 
 module.exports = {
